@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% block content %}
+<div class="container my-4">
+  <div class="row">
+    <div class="card text-center py-4">
+      <div class="car-body">
+        <form action="" method="POST">
+          {% csrf_token %}
+          <p>
+            Do you realy want to delete this article :
+            <strong>{{object}}</strong>
+          </p>
+          <input
+            type="submit"
+            value="delete"
+            name="delete"
+            id=""
+            class="btn btn-danger"
+          />
+          <a href="{% url 'my-articles' %}" class="btn btn-secondary">No</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

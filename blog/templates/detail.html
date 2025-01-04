@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <!-- Details article -->
+    <div class="col-md-8">
+      <h2 class="text-center my-3">Details du Produit</h2>
+      <img src=" {{article.image.url}} " alt="" style="max-width: 600px" />
+      <h2>{{article.title}}</h2>
+      <p>{{article.des}}</p>
+    </div>
+    <!-- Les articles en relation  -->
+    <div class="col-md-4">
+      <h3 class="my-3">Les articles en relation</h3>
+      <div class="row">
+        <!-- Loop Article en relation  -->
+        {% for art in aer %}
+        <!-- Condition pour ne pas afficher le meme article -->
+        {% if art.id != article.id %}
+        <div class="col-md-7">
+          <a href="{% url 'detail' id=art.id %}">
+            <img src=" {{art.image.url}} " alt="" style="max-width: 175px" />
+          </a>
+        </div>
+        <!-- Details article en relation -->
+        <div class="col-5">
+          <strong> {{art.title}} </strong> <br />
+          {{art.des|truncatewords:7}}
+          <hr />
+        </div>
+        {% endif %} {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

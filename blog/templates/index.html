@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+<!-- tempmate here  -->
+{% block content %}
+<!-- Project start here -->
+<h1 class="text-center mt-4">WELCOME ON OUR SITEWEB</h1>
+<!-- container -->
+<div class="container">
+  <div class="row">
+    {% for articles in liste_articles %} {% if articles.id %}
+    <!-- Card -->
+    <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+      <div class="card">
+        <!-- Card-image -->
+        {% if articles.image == "http://default" %}
+        <a href="{% url 'detail' id=articles.id %}">
+          <img
+            src="https://placeholderimage.eu/api/800/600 "
+            class="card-img-top"
+            alt="Fissure in Sandstone"
+          />
+        </a>
+        {% else %}
+        <a href="{% url 'detail' id=articles.id %}">
+          <!-- a verifier la gestion des images  -->
+          <img
+            src=" {{articles.image.url}} "
+            class="card-img-top"
+            alt="Fissure in Sandstone"
+          />
+        </a>
+        {% endif %}
+        <!-- Card-contain -->
+        <div class="card-body" style="height: 240px">
+          <!-- title -->
+          <h5 class="card-title">{{articles.title}}</h5>
+          <!-- Text -->
+          <p class="card-text">{{articles.des|truncatewords:9}}</p>
+          <p class="card-text">{{articles.create_at|timesince}}</p>
+          <!-- Button -->
+          <a
+            href="{% url 'detail' id=articles.id %}"
+            class="btn btn-primary"
+            data-mdb-ripple-init
+            >Read more</a
+          >
+        </div>
+        <!-- End card contain -->
+      </div>
+    </div>
+    {% else %}
+    <li>
+      <h2>Produit non disponible</h2>
+    </li>
+    {% endif %} {% endfor %}
+  </div>
+</div>
+<!-- End your project here-->
+
+{% endblock %}
